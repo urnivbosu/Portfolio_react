@@ -1,23 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import "./styles.css";
+import About from "./About";
+import Projects from "./Projects";
+import Contact from "./Contact";
+import Navigation from "./Navigation";
 
 function App() {
+  const [page, setPage] = useState("home");
+
+  const renderPage = () => {
+    switch (page) {
+      case "about":
+        return <About />;
+      case "projects":
+        return <Projects />;
+      case "contact":
+        return <Contact />;
+      default:
+        return (
+          <div className="home">
+            <h2>Welcome to my Portfolio</h2>
+            <p>My name is Urniv Bosu, I am a student of Vellore Institute of Technology, Chennai</p>
+          </div>
+        );
+    }
+  };
+
   return (
     <div className="App">
+      <Navigation setPage={setPage} />
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <h1>My Portfolio</h1>
       </header>
+      <main>{renderPage()}</main>
     </div>
   );
 }
